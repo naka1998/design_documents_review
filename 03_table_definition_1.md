@@ -5,29 +5,33 @@
 * 全体を通しての指摘事項の場合、テーブル名の部分を「全体」「共通」などとしてください。
 
 ## 全体
-- 
-
+- created_at, updated_atの説明が全てユーザ登録日時・更新日時になっている
+- created_at, updated_atのデータ型がtimestampでなく、datetimeになっている
 ## Admin
 - テーブル名が単数形
 - 「admin_id」のPKに○がない。
 - 「admin_id」のAUTO INCREMENTALに○がない
 - 「admin_id」のINDEXに○がない
+- 「admin_email」「admin_password」の「admin_」が不要
 ## Users
 - 「user_○_name」「user_○_kana」はそれぞれfirstとlastのことだと思われるが分かりづらい
 - 「ship_address」とあるが、これだと配送先住所を1つしか持てない
 - 「member_status」のデータ型がstringになっている
+- 「member_status」だと意味が通りづらい。「is_active」などにすべき
 - 「user_f_name」「user_f_kana」のNOT NULLに○がない
+- 「user_l_name」「user_f_name」「user_l_kana」「user_f_kana」「user_tel」「user_email」「user_password」の「user_」が不要
 ## Products
 - 「products_id」が複数形になっている
 - 「disc_id」を持っている
 - 「genre_id」「label_id」「artist_id」のFKに○がない
-- テーブル名は「Products」なので「cd_image」「cd_title」のcd → productのほうがいい
+- テーブル名は「Products」なので「cd_image」「cd_title」のcd → productのほうがいい(そもそも『「cd_」は不要』というべき)
 - 「発売日」を格納するカラムがない
 - 「cd_image」のDEFAULTが「画像準備中」になっている
-- 「stock」がある(「在庫数は入荷記録と受注詳細記録から算出する」と異なる)
+- 「stock」がある(「在庫数は入荷記録と受注詳細記録から算出する」と異なる)ので削除する
 - 「stock_status(在庫ステータス)」はあるが「販売ステータス」がない
 ## Disks
 - 「track_num」がある
+- 「products_id」が複数形になっている
 ## Songs, Labels, Artists, Genreまとめて
 - PKが存在しない
 - 「曲名」や「レーベル名」を格納するカラムの名前が「song」「label」ではわかりづらい。
@@ -46,15 +50,22 @@
 - PKが存在しない
 - テーブル名が単数形
 - 「products_id」のデータ型がない
+- 「products_id」が複数形になっている
 - 「subtotal(小計金額)」は不必要
 ## Buy details
 - 「buy_details_id」が複数形になっている
 - 「buy_id」を持っていない
+- テーブル名を管理者から見た名前にする(受注詳細を意味するOrder_detailsとか)
+- テーブル名の変更に合わせて「buy_num(購入枚数)」も変更すべき
 ## Buy
 - 「buy_details_id」を持っている
+- 「buy_details_id」が複数形になっている
 - 配送先郵便番号・配送先氏名を持っていない
 - 「buy_at(購入日)」は不必要
 - 「pay」のデータ型がstringだが、enum使うことを考えたらintegerか
+- テーブル名を管理者から見た名前にする(受注を意味するOrdersとか)
+- 「stock(支払合計)」では意味が一致しない。日本語に合わせたカラム名にする
+- 「pay(支払い方法)」では意味が一致しない。「方法」を含むカラム名にする
 
 **研修担当レビュー**
 <font color="Red">再提出の際はこのレビューを残しておいてください。</font>
