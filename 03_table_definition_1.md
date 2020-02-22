@@ -20,13 +20,13 @@
 - 「member_status」だと意味が通りづらい。「is_active」などにすべき
 - 「user_f_name」「user_f_kana」のNOT NULLに○がない
 - 「user_l_name」「user_f_name」「user_l_kana」「user_f_kana」「user_tel」「user_email」「user_password」の「user_」が不要
+- 「zip_code(郵便番号)」「user_tel(電話番号)」のデータ型がintegerになっている(stringにすべき)
 ## Products
 - 「products_id」が複数形になっている
 - 「disc_id」を持っている
 - 「genre_id」「label_id」「artist_id」のFKに○がない
-- テーブル名は「Products」なので「cd_image」「cd_title」のcd → productのほうがいい(そもそも『「cd_」は不要』というべき)
+- 「cd_image」「cd_title」の「cd_」が不要
 - 「発売日」を格納するカラムがない
-- 「cd_image」のDEFAULTが「画像準備中」になっている
 - 「stock」がある(「在庫数は入荷記録と受注詳細記録から算出する」と異なる)ので削除する
 - 「stock_status(在庫ステータス)」はあるが「販売ステータス」がない
 ## Disks
@@ -81,10 +81,13 @@
 ## products
 -「発売日」を格納するカラムがない
  -発売日というデータは今回のECサイトでは利用しないため、この指摘は不要です。
+  - 設計書必須要件 > データ要件の商品には「発売日」の記述があります
 
 -「cd_image」のDEFAULTが「画像準備中」になっている
   -cd_imageカラムには「画像準備中」という名前の画像を入れるのでこの指摘は不要です。
+
   
 ## Buy details
 -「buy_details_id」が複数形になっている
 　-「buy_details_id」は不要なカラムなのでこの指摘は必要ありません。削除してください。
+    - Buy detailsテーブルのPKが必要ない、ということは購入詳細テーブル自体が必要ないということでしょうか 
