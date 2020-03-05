@@ -8,6 +8,7 @@
 - テーブル名は先頭大文字にする
 - created_at, updated_atのデータ型がtimestampでなくdatetimeになっている
 - 入荷を表すテーブルが存在しない
+- PKは全て「id」とすべき
 
 ## admins
 - admin_email, admin_passwordのadmin_は不要
@@ -17,18 +18,20 @@
  - 退会している OR していない、のはずなのでデータ型をbooleanにすべき
  - booleanにする場合、カラム名はis_hogehogeにするのがよい
 - user_l_name, user_f_name, user_l_kana, user_f_kana, user_tel, user_email, user_passwordのuser_は不要
+- user_l_name, user_f_name, user_l_kana, user_f_kanaの「l_」「f_」は、それぞれ「last_」「first_」にすべき(省略すべきでない)
 
 ## ships
 - ship_name, ship_address, ship_tel, ship_codeのship_は不要
 - ship_idのINDEXに○がない
 ## products
 - products_idが複数形になっている
+- disc_idは不要
 - 「商品名」を表すカラム名をcd_titleとするのは不適
 - 要件「在庫数は入荷記録と受注詳細記録から算出する」より、stockは不要
 - 「stock_status(在庫ステータス)」を表すカラムは不要
  - 「販売ステータス」を表すカラムは必要
 ## discs
-- products_idは不要
+- products_idが複数形
 - disc_numのdisc_は不要
 - disc_idのINDEXに○がない
 ## songs
@@ -56,6 +59,7 @@
 - sell_details_Idは不要
 - 「支払い方法」を表すカラム名として、payでは「方法」を表せていない
 - total(支払い合計)は「sell_detailsの購入価格カラム」を作成すれば計算可能なので不要
+  - データベースの負荷を考えるとあったほうがよい
 - sell_idのINDEXに○がない
 
 ## 指摘事項
